@@ -120,7 +120,7 @@ class BurgerBuilder extends Component {
             .catch(error => {
                 this.setState({loading:false, purchasing: false});
             });
-        //  '.json' is firebase rrequirement only
+        // '.json' is firebase rrequirement only
     }
 
     render () {
