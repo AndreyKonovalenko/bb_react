@@ -122,6 +122,8 @@ class BurgerBuilder extends Component {
         //         this.setState({loading:false, purchasing: false});
         //     });
         // // '.json' is firebase rrequirement only
+        
+        this.props.history.push('/checkout');
     }
 
     render () {
