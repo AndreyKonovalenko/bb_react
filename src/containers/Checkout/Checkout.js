@@ -13,10 +13,28 @@ class Checkout extends Component {
         }
     }
     
+    checkoutCancelledHandler = () => {
+        this.props.history.goBack();
+        //goBack() simply goes back to the last page
+    }
+    // this is "this" type of syntax to be able to use "this"
+    
+    checkoutContinuedHandler = () => {
+        this.props.history.replace('/checout/contact-data');
+    }
+    
+    // componentDidMount (){
+    //     console.log( "Checkout DidMount with props: ", this.props.history);
+    // }
+    
     render () {
+        
         return (
             <div>
-                <CheckoutSummary ingredients={this.state.ingredients}/>
+                <CheckoutSummary
+                    ingredients={this.state.ingredients}
+                    checkoutCancelled={this.checkoutCancelledHandler}
+                    checkoutContinued={this.checkoutContinuedHandler}/>
             </div>
         );
     }
