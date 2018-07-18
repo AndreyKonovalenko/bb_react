@@ -5,7 +5,7 @@ import cssObject from './NavigationItems.css'
 const navigationItems = () => (
     <ul className={cssObject.NavigationItems}>
         <NavigationItem link="/" active={true} >Burger Builder</NavigationItem>
-        <NavigationItem link="/">Checkout</NavigationItem>
+        <NavigationItem link="/checkout">Checkout</NavigationItem>
     </ul>
 );
 
