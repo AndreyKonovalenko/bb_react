@@ -15,16 +15,16 @@ const withErrorHandler = (WrappedComponent, axios) => {
                 this.setState({error: null});
                 return request;
             });
-            console.log(this.requestInterceptor);
+            //console.log(this.requestInterceptor);
             this.resoponseInterceptor = axios.interceptors.response.use(response => response, error => {
-                console.log(error);
+              //  console.log(error);
                 this.setState({error: error});
             });
         }
         
         // removeing intreceptors is preventing memary leaks
         componentWillUnmount() {
-            console.log('Will Unmount!', this.requestInterceptor, this.resoponseInterceptor);
+          //  console.log('Will Unmount!', this.requestInterceptor, this.resoponseInterceptor);
             axios.interceptors.request.eject(this.requestInterceptor);
             axios.interceptors.response.eject(this.resoponseInterceptor);
         }
