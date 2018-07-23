@@ -29,11 +29,26 @@ class Orders extends Component {
                 this.setState({loading: false});
             });
     }
+    
+    ingredientsExtrator(order_element) {
+        const ingredients_arr = [];
+        for (let key in order_element) {
+            ingredients_arr.push(key + ": " + order_element[key]);
+        }
+        return ingredients_arr;
+    }
+    
     render () {
+
         return (
             <div>
-                <Order />
-                <Order />
+                {this.state.orders.map(element => (
+                  <Order 
+                    key={element.id} 
+                    ingredients = {(this.ingredientsExtrator(element.ingredients)).map(ing => (
+                        <p key={ing}>{ing}</p>))}
+                    price={element.price}/>)
+                )}
             </div>
         );
     }
