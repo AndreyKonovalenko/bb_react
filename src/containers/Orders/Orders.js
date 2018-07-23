@@ -30,14 +30,7 @@ class Orders extends Component {
             });
     }
     
-    ingredientsExtrator(order_element) {
-        const ingredients_arr = [];
-        for (let key in order_element) {
-            ingredients_arr.push(key + ": " + order_element[key]);
-        }
-        return ingredients_arr;
-    }
-    
+
     render () {
 
         return (
@@ -45,8 +38,7 @@ class Orders extends Component {
                 {this.state.orders.map(element => (
                   <Order 
                     key={element.id} 
-                    ingredients = {(this.ingredientsExtrator(element.ingredients)).map(ing => (
-                        <p key={ing}>{ing}</p>))}
+                    ingredients = {element.ingredients}
                     price={element.price}/>)
                 )}
             </div>
