@@ -24,7 +24,7 @@ const input = (props) => {
                 {...props.elementConfig}
                 value = {props.value}/>
     }
-    
+    console.log(props, inputElement);
     return (
         <div className={cssObject.Input}>
             <label className={cssObject.Label}>{props.label}</label>
