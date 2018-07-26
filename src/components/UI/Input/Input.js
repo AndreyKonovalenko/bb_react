@@ -5,15 +5,24 @@ import cssObject from './Input.css'
 
 const input = (props) => {
     let inputElement = null;
-    switch (props.input_stype) {
+    switch (props.elementType) {
         case ('input'): 
-            inputElement = <input className={cssObject.InputElement} {...props}/>;
+            inputElement = <input 
+                className={cssObject.InputElement} 
+                {...props.elementConfig}
+                value = {props.value}/>;
             break;
         case ('textaria'):
-            inputElement = <textaria className={cssObject.InputElement} {...props}/>;
+            inputElement = <textaria 
+                className={cssObject.InputElement} 
+                {...props.elementConfig}
+                value = {props.value}/>;
             break;
         default:
-            inputElement = <input className={cssObject.InputElement} {...props}/>
+            inputElement = <input 
+                className={cssObject.InputElement} 
+                {...props.elementConfig}
+                value = {props.value}/>
     }
     
     return (
