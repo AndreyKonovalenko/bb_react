@@ -5,17 +5,22 @@ import cssObject from './Input.css'
 
 const input = (props) => {
     let inputElement = null;
+    const inputCssClasses = [cssObject.InputElement];
+    
+    if (props.invalid && props.shouldValidate && props.touched) {
+        inputCssClasses.push(cssObject.Invalid);
+    }
     switch (props.elementType) {
         case ('input'): 
             inputElement = <input 
-                className={cssObject.InputElement} 
+                className={inputCssClasses.join(' ')} 
                 {...props.elementConfig}
                 value = {props.value}
                 onChange = {props.changed}/>;
             break;
         case ('textaria'):
             inputElement = <textaria 
-                className={cssObject.InputElement} 
+                className={inputCssClasses.join(' ')} 
                 {...props.elementConfig}
                 value = {props.value}
                 onChange = {props.changed}/>;
@@ -23,7 +28,7 @@ const input = (props) => {
         case ('select'):
             inputElement = 
                 <select 
-                    className={cssObject.InputElement} 
+                    className={inputCssClasses.join(' ')} 
                     value = {props.value}
                     onChange={props.changed}>
                     {props.elementConfig.options.map(element => (
@@ -33,7 +38,7 @@ const input = (props) => {
             break;    
         default:
             inputElement = <input 
-                className={cssObject.InputElement} 
+                className={inputCssClasses.join(' ')} 
                 {...props.elementConfig}
                 value = {props.value}
                 onChange = {props.changed}/>
