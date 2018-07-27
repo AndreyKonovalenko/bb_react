@@ -58,17 +58,23 @@ class ContactData extends Component {
                         {value: 'cheapest', displayValue: 'Cheapest'}
                     ],
                 },
-                value: '',
+                value: "fastest",
             }
         },
         loading: false
     }
     
     orderHandler = (event) => {
+        event.preventDefault();
         this.setState({loading: true});
+        const formData = {};
+        for(let key in this.state.orderForm) {
+            formData[key] = this.state.orderForm[key].value;
+        }
         const order = {
             ingredients: this.props.ingredients,
-            price: this.props.totalPrice
+            price: this.props.totalPrice,
+            orderData: formData
             
         }
         // in a real app we should recalculate the price on server, because users can manipulate data
@@ -112,7 +118,7 @@ class ContactData extends Component {
             });
         }
         let form = (
-                <form>
+                <form onSubmit = {this.orderHandler}>
                     {formElementArray.map(element => (
                     <Input
                             key={element.id} 
@@ -128,6 +134,7 @@ class ContactData extends Component {
             form = <Spinner />
         }
         
+        console.log(this.state.orderForm.deliveryMethod.value);
         return (
             <div className={cssObject.ContactData}>
                 <h4>Enter your Contact Data </h4>
