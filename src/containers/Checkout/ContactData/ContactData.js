@@ -88,7 +88,20 @@ class ContactData extends Component {
         event.preventDefault();
         console.log(this.props);
     }
-    
+     
+    inputChangedHandler = (event, inputIdentifier) => {
+        //immutable way to copy complex objects with nested objects
+        //using spread operator "..."
+        const updatedOrderForm = {
+            ...this.state.orderForm
+        };
+        const updatedFormElement = {
+            ...updatedOrderForm[inputIdentifier]
+        };
+        updatedFormElement.value = event.target.value;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        this.setState({orderForm: updatedOrderForm});
+    }
  
     render () {
         const formElementArray = [];
@@ -105,7 +118,8 @@ class ContactData extends Component {
                             key={element.id} 
                             elementType={element.config.elementType}
                             elementConfig={element.config.elementConfig}
-                            value={element.config.value}/>
+                            value={element.config.value}
+                            changed={(event) => this.inputChangedHandler(event, element.id)}/>
                     ))}
                     <Button buttonType="Success" clicked={this.orderHandler}>ORDER</Button>
                 </form>
