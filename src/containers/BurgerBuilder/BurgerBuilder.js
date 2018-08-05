@@ -38,6 +38,10 @@ class BurgerBuilder extends Component {
     }
     
     updataPurchaseState (ingredients) {
+        // We do not update any state here after adding Redux in our project !!!
+        // We use this method only for checking if any ingredients was added to the order
+        // any ingredient quantity are more then 0
+        // if yes order butten become active
         const sum = Object.keys(ingredients)
             .map(element => {
                 return ingredients[element]
