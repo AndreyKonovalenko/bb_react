@@ -1,32 +1,13 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
 
+
 class Checkout extends Component {
-    state = {
-        ingredients: null,
-        totalPrice: 0
-    }
-    
-    componentWillMount() {
-        const query = new URLSearchParams(this.props.location.search);
-        const ingredients = {};
-        let price = 0;
-        // DON'T forget const is read-only!!!!! so use let for price
-        for (let param of query.entries()){
-            // ['salad', '1']
-            // adding "+" sybol to the string convert it to a number
-            if (param[0] === 'price') {
-                price = +param[1];
-            } else {
-                ingredients[param[0]] = +param[1];
-            }
-        }
-        this.setState({ingredients: ingredients, totalPrice: price});
-    }
-    
+
     checkoutCancelledHandler = () => {
         this.props.history.goBack();
         //goBack() simply goes back to the last page
@@ -46,12 +27,12 @@ class Checkout extends Component {
         return (
             <div>
                 <CheckoutSummary
-                    ingredients={this.state.ingredients}
+                    ingredients={this.props.ings}
                     checkoutCancelled={this.checkoutCancelledHandler}
                     checkoutContinued={this.checkoutContinuedHandler}/>
                     <Route 
                         path={this.props.match.path + '/contact-data'} 
-                        render={(props) => (<ContactData ingredients={this.state.ingredients} totalPrice={this.state.totalPrice} {...props}/>)} />
+                        component={ContactData}/>
             </div>
         );
     }
@@ -59,4 +40,12 @@ class Checkout extends Component {
     // So we can use props.history in ContactData compenent
 }
 
-export default Checkout;
+const mapStateToProps = state => {
+    return {
+        ings: state.ingredients
+    };
+};
+
+// if we omit mapStateToProps in connect function we use this syntax:
+// connect(null, mapDispatchProps)
+export default connect(mapStateToProps)(Checkout);
