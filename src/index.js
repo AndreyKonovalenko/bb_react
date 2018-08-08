@@ -4,14 +4,21 @@ import { BrowserRouter} from 'react-router-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import {createStore, applyMiddleware, compose } from 'redux';
+import {createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import {Provider} from 'react-redux';
-import reducer from './store/reducer';
+import burgerBuilder from './store/reducers/burgerBuilder.js';
+import order from './store/reducers/order.js';
+
+
+const rootReducer = combineReducers({
+    burger: burgerBuilder,
+    order: order
+});
 
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducer, composeEnhancers(applyMiddleware()));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware()));
 
 const app = (
     <Provider store={store}>
