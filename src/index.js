@@ -7,18 +7,18 @@ import registerServiceWorker from './registerServiceWorker';
 import {createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import {Provider} from 'react-redux';
 import burgerBuilder from './store/reducers/burgerBuilder.js';
-import order from './store/reducers/order.js';
+//import order from './store/reducers/order.js';
 
 
-const rootReducer = combineReducers({
-    burger: burgerBuilder,
-    order: order
-});
+// const rootReducer = combineReducers({
+//     burger: burgerBuilder,
+//     order: order
+// });
 
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware()));
+const store = createStore(burgerBuilder, composeEnhancers(applyMiddleware()));
 
 const app = (
     <Provider store={store}>
