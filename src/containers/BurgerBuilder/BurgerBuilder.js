@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; 
-import axios from '../../axios-orders';
 
 import Aux from '../../hoc/Aux/Aux';
+import axios from '../../axios-orders'
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
@@ -20,21 +20,12 @@ class BurgerBuilder extends Component {
     //     this.state={...}
     // }
     state = {
-        purchasing: false,
-        loading: false,
-        error: false
+        purchasing: false
     }
 
     componentDidMount() {
         // console.log(this.props);
-        // axios.get('https://bb-react-5d531.firebaseio.com/ingredients.json')
-        //     .then(response => {
-        //         this.setState({ingredients: response.data});
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //         this.setState({error: true});
-        //     })
+ 
     }
     
     updataPurchaseState (ingredients) {
@@ -105,9 +96,6 @@ class BurgerBuilder extends Component {
                 price={this.props.price}/>;
         }
 
-        if (this.state.loading) {
-            orderSummary = <Spinner />;
-        }
 
         return (
             <Aux>
