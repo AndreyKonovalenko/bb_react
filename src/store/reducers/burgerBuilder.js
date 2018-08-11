@@ -38,11 +38,24 @@ const reducer = (state = initialState, action) => {
                 totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
             };
         case actionTypes.SET_INGREDIENTS: 
+            // for the purpose of positioning ingredients with out using more CSS we hardcoded 
+            // ingredients object in order we wont to show up in the viewport
+            // return {
+            //     ...state,
+            //     ingredients: action.ingredients,
+            //     error: false
+            // };
             return {
                 ...state,
-                ingredients: action.ingredients,
+                ingredients: {
+                    salad: action.ingredients.salad,
+                    bacon: action.ingredients.bacon,
+                    cheese: action.ingredients.cheese,
+                    meat: action.ingredients.meat,
+                },
                 error: false
-            };
+            }
+            
         case actionTypes.FETCH_INGREDIENT_FAILED:
             return {
                 ...state,
