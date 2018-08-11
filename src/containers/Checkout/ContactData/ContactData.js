@@ -6,6 +6,8 @@ import cssObject from  './ContactData.css';
 import axios from '../../../axios-orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+import * as actions  from '../../../store/actions/index'
 
 class ContactData extends Component {
     
@@ -116,7 +118,7 @@ class ContactData extends Component {
     
     orderHandler = (event) => {
         event.preventDefault();
-        this.setState({loading: true});
+
         const formData = {};
         for(let key in this.state.orderForm) {
             formData[key] = this.state.orderForm[key].value;
@@ -128,21 +130,7 @@ class ContactData extends Component {
             
         }
         // in a real app we should recalculate the price on server, because users can manipulate data
-
-        axios.post('/orders.json', order)
-            .then(response => {
-                this.setState({loading: false});
-                this.props.history.push('/');
-            })
-            .catch(error => {
-                this.setState({loading: false});
-            });
-        // '.json' is firebase requirement only
-    
-        // to preventing reloading page inside form which is it default behaver
-        // we should use preventDefaul
-        event.preventDefault();
-        console.log(this.props);
+        this.props.onOrderBurger(order);
     }
      
     inputChangedHandler = (event, inputIdentifier) => {
@@ -214,4 +202,10 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = dispatch => {
+    return {
+        onOrderBurger: (orderData) => dispatch(actions.purchaseBurgerStart(orderData))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
