@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
@@ -23,18 +23,21 @@ class Checkout extends Component {
     // }
     
     render () {
-        
-        return (
-            <div>
-                <CheckoutSummary
-                    ingredients={this.props.ings}
-                    checkoutCancelled={this.checkoutCancelledHandler}
-                    checkoutContinued={this.checkoutContinuedHandler}/>
+        let summery = <Redirect to="/" />
+        if (this.props.ings) {
+            summery = (
+                <div>
+                    <CheckoutSummary
+                        ingredients={this.props.ings}
+                        checkoutCancelled={this.checkoutCancelledHandler}
+                        checkoutContinued={this.checkoutContinuedHandler}/>
                     <Route 
                         path={this.props.match.path + '/contact-data'} 
-                        component={ContactData}/>
-            </div>
-        );
+                        component={ContactData} />
+                </div>
+            );
+        }
+        return  summery;        
     }
     // when we reneder componint manualy with render method we should pass props to it by using (props) and {...props} 
     // So we can use props.history in ContactData compenent
