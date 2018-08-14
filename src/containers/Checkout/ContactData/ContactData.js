@@ -99,22 +99,6 @@ class ContactData extends Component {
     }
     
     checkValidity(value, rules) {
-        // We checking our rulse one by one to prevet false validation for element which dose not have length checking rule
-        // let isValid = true;
-        
-        // if(rules.required && isValid) {
-        //     isValid = value.trim() !== '' && isValid;
-        // }
-        
-        // if (rules.minLength ) {
-        //     isValid = value.length >= rules.minLength && isValid
-        // }
-        
-        // if (rules.maxLength ) {
-        //     isValid = value.length <= rules.maxLength && isValid
-        // }
-        
-        // return isValid;
         let isValid = true;
         if (!rules) {
             return true;
