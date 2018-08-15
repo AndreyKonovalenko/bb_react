@@ -130,6 +130,7 @@ class Auth extends Component {
     
 }
 
+
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSingup) => dispatch(actions.auth(email, password, isSingup))
