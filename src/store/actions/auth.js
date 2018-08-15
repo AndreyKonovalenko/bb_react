@@ -4,7 +4,7 @@ import * as actionTypes from './actionTypes';
 
 export const authStart = () => {
     return {
-        type: actionTypes.AUTH_START
+        type: actionTypes.AUTH_START,
     };
 };
 
@@ -42,8 +42,8 @@ export const auth = (email, password, isSingup) => {
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
             })
             .catch(error => {
-                console.log(error);
-                dispatch( authFail(error) );
+                dispatch(authFail(error.response.data.error));
+                // axios wraps response into error object
             });
     };
 };
