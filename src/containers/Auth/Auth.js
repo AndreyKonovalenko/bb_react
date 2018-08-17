@@ -44,6 +44,15 @@ class Auth extends Component {
         isSingup: true
     };
     
+    componentDidMount () {
+        // HERE WE TEST WHETHER THE USER STARTS BUILDING BURGER OR NOT
+        if (!this.props.buildingBurger && this.props.authRedirectPath !== '/'){
+            this.props.onSetAuthRedirectPath();
+            // I don't need to pass any argument to onSetAuthRedirectPath
+            // Because I hardcoded '/' path in mapDispatchToProps function 
+        }
+    }
+    
     checkValidity(value, rules) {
         let isValid = true;
         if (!rules) {
@@ -130,7 +139,7 @@ class Auth extends Component {
         
         let authRedirect = null;
         if (this.props.isAuthenticated) {
-            authRedirect = <Redirect to="/" />;
+            authRedirect = <Redirect to={this.props.authRedirectPath} />;
         }
         
         return (
@@ -143,7 +152,7 @@ class Auth extends Component {
                 </form>
                 <Button
                     clicked={this.switchAuthModeHandler}
-                    buttonType="Danger">SWITCH TO {this.state.isSingup ? 'SINGIN' : 'SINGUP'}
+                    buttonType="Danger">SWITCH TO {this.state.isSingup ? 'SINGIN': 'SINGUP'}
                 </Button>
             </div>    
         );
@@ -156,13 +165,16 @@ const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
         error: state.auth.error,
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        buildingBurger: state.burgerBuilder.building,
+        authRedirectPath: state.auth.authRedirectPath
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password, isSingup) => dispatch(actions.auth(email, password, isSingup))
+        onAuth: (email, password, isSingup) => dispatch(actions.auth(email, password, isSingup)),
+        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
     };
 };
 
