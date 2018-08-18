@@ -8,7 +8,6 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import cssObject from './Auth.css';
 import * as  actions from  '../../store/actions/index';
 
-
 class Auth extends Component {
     state = {
         controls: {
@@ -142,6 +141,7 @@ class Auth extends Component {
             authRedirect = <Redirect to={this.props.authRedirectPath} />;
         }
         
+        console.log(this.state.isSingup);
         return (
             <div className={cssObject.Auth}>
                 {authRedirect}
