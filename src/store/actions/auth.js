@@ -95,5 +95,5 @@ export const authCheckState = () => {
                 dispatch(logout());
             }
         }
-    }
-}
+    };
+};

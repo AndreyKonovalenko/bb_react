@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -45,6 +45,7 @@ class Auth extends Component {
     
     componentDidMount () {
         // HERE WE TEST WHETHER THE USER STARTS BUILDING BURGER OR NOT
+        console.log(this.props.buildingBurger, this.props.authRedirectPath);
         if (!this.props.buildingBurger && this.props.authRedirectPath !== '/'){
             this.props.onSetAuthRedirectPath();
             // I don't need to pass any argument to onSetAuthRedirectPath
@@ -135,13 +136,15 @@ class Auth extends Component {
                 <p>{this.props.error.message}</p>    
             );
         }
-        
         let authRedirect = null;
+        console.log(authRedirect, this.props.authRedirectPath, this.props.isAuthenticated);
+        
         if (this.props.isAuthenticated) {
             authRedirect = <Redirect to={this.props.authRedirectPath} />;
         }
         
         console.log(this.state.isSingup);
+        
         return (
             <div className={cssObject.Auth}>
                 {authRedirect}
