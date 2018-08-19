@@ -42,7 +42,7 @@ export const checkAuthTimeout = (expirationTime) => {
 };
 
 
-export const auth = (email, password, isSingup) => {
+export const auth = (email, password, isSingup, userId) => {
     return dispatch => {
         dispatch(authStart());
         const authData = {
