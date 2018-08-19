@@ -42,7 +42,7 @@ export const checkAuthTimeout = (expirationTime) => {
 };
 
 
-export const auth = (email, password, isSingup, userId) => {
+export const auth = (email, password, isSingup) => {
     return dispatch => {
         dispatch(authStart());
         const authData = {
@@ -61,7 +61,7 @@ export const auth = (email, password, isSingup, userId) => {
                 const expirationDate = new Date( new Date().getTime() + response.data.expiresIn * 1000);
                 localStorage.setItem('token', response.data.idToken);
                 localStorage.setItem('expirationDate', expirationDate);
-                localStorage.setItem('userid', response.data.localId);
+                localStorage.setItem('userId', response.data.localId);
                 // buildin window object property, Chrome devTools - Application - Storage - Local Storage 
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
                 dispatch(checkAuthTimeout(response.data.expiresIn));
