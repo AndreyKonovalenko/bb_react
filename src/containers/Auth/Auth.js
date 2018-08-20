@@ -46,7 +46,6 @@ class Auth extends Component {
     
     componentDidMount () {
         // HERE WE TEST WHETHER THE USER STARTS BUILDING BURGER OR NOT
-        console.log(this.props.buildingBurger, this.props.authRedirectPath);
         if (!this.props.buildingBurger && this.props.authRedirectPath !== '/'){
             this.props.onSetAuthRedirectPath();
             // I don't need to pass any argument to onSetAuthRedirectPath
@@ -104,19 +103,15 @@ class Auth extends Component {
         let errorMessage = null;
         
         if (this.props.error) {
-            console.log(this.props.error.message);
             errorMessage = (
                 <p>{this.props.error.message}</p>    
             );
         }
         let authRedirect = null;
-        console.log(authRedirect, this.props.authRedirectPath, this.props.isAuthenticated);
-        
+
         if (this.props.isAuthenticated) {
             authRedirect = <Redirect to={this.props.authRedirectPath} />;
         }
-        
-        console.log(this.state.isSingup);
         
         return (
             <div className={cssObject.Auth}>

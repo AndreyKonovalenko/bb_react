@@ -27,7 +27,6 @@ export const purchaseBurger = ( orderData, token ) => {
         dispatch(purchaseBurgerStart());
         axios.post('/orders.json?auth=' + token, orderData)
             .then( response => {
-                console.log( response.data );
                 dispatch( purchaseBurgerSuccess(response.data.name, orderData) );
             })
             .catch(error => {
@@ -64,13 +63,11 @@ export const fetchOrdersStart = () => {
 
 export const fetchOrders = (token, userId) => {
     return dispatch  => {
-        console.log(userId);
         dispatch(fetchOrdersStart());
         const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
         // orderBy - sintax provided by Firebase
         axios.get('/orders.json' + queryParams)
             .then(response => {
-                console.log(response.data);
                 const fetchOrders = [];
                 for (let key in response.data){
                     fetchOrders.push({

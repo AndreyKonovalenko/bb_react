@@ -131,10 +131,8 @@ class ContactData extends Component {
         
         let formIsValid = true;
         for (let inputIdentifier in updatedOrderForm) {
-            console.log(updatedOrderForm[inputIdentifier].valid);
             formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
         }
-        console.log(formIsValid);
         this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
     }
  
@@ -166,7 +164,6 @@ class ContactData extends Component {
             form = <Spinner />
         }
         
-        console.log(this.state.orderForm.deliveryMethod.value);
         return (
             <div className={cssObject.ContactData}>
                 <h4>Enter your Contact Data </h4>
