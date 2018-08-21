@@ -12,8 +12,10 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actions from '../../store/actions/index';
 
 
-
-class BurgerBuilder extends Component {
+// export using for testing purpose to export class as a normal component
+//to the test file
+// this is a convitient way to strip up the connetion to Redux
+export class BurgerBuilder extends Component {
     //old syntax
     // constructor(props) {
     //     super(props);
